@@ -1,60 +1,57 @@
 class TabItem {
-  constructor(element) {
-    // Assigns this.element to the passed in element
-    this.element = element;
-  }
+    constructor(element) {
+        // Assigns this.element to the passed in element
+        this.element = element;
+    }
 
-  select() {
-    // Select all ".tabs-item" elements from the DOM
-    const items = document.querySelectorAll('.tabs-item');
+    select() {
+        // Select all ".tabs-item" elements from the DOM
+        const items = document.querySelectorAll('.tabs-item');
 
-    // Removes the class "tabs-item-selected" from each element
-    items.forEach(item => item.classList.remove("tabs-item-selected"));
+        // Removes the class "tabs-item-selected" from each element
+        items.forEach(item => item.classList.remove("tabs-item-selected"));
 
-    // Adds a class named "tabs-item-selected" to this element
-    this.element.classList.toggle("tabs-item-selected");
-  }
+        // Adds a class named "tabs-item-selected" to this element
+        this.element.classList.toggle("tabs-item-selected");
+    }
 }
 
 class TabLink {
-  constructor(element) {
-    // Assigns this.element to the passed in DOM element
-    this.element = element;
+    constructor(element) {
+        // Assigns this.element to the passed in DOM element
+        this.element = element;
 
-    // Gets the custom data attribute on the Link
-    this.data = this.element.dataset.tab;
+        // Gets the custom data attribute on the Link
+        this.data = this.element.dataset.tab;
 
-    // Using the custom data attribute, gets the associated Item element
-    this.itemElement = document.querySelector(`.tabs-item[data-tab="${this.data}"]`);
-    
-    // Using the Item element, creates a new instance of the TabItem class
-    this.tabItem = new TabItem(this.itemElement);
-    
-    // Add a click event listener on this instance, calling the select method on click
-    this.element.addEventListener("click", (event) => {
-      this.select();
-      event.stopPropagation();
-    });
-  };
+        // Using the custom data attribute, gets the associated Item element
+        this.itemElement = document.querySelector(`.tabs-item[data-tab="${this.data}"]`);
 
-  select() {
-    // Gets all of the elements with the tabs-link class
-    const links = document.querySelectorAll('.tabs-link');
+        // Using the Item element, creates a new instance of the TabItem class
+        this.tabItem = new TabItem(this.itemElement);
 
-    // Using a loop or the forEach method remove the 'tabs-link-selected' class from all of the links
-    links.forEach((link) => {
-      link.classList.remove('tabs-link-selected')
-  });
-    // Add a class named "tabs-link-selected" to this link
-    this.element.classList.toggle("tabs-link-selected");
-    
-    // Call the select method on the item associated with this link
-    this.tabItem.select();
-  }
+        // Add a click event listener on this instance, calling the select method on click
+        this.element.addEventListener("click", (event) => {
+            this.select();
+            event.stopPropagation();
+        });
+    };
+
+    select() {
+        // Gets all of the elements with the tabs-link class
+        const links = document.querySelectorAll('.tabs-link');
+
+        // Using a loop or the forEach method remove the 'tabs-link-selected' class from all of the links
+        links.forEach((link) => {
+            link.classList.remove('tabs-link-selected')
+        });
+        // Add a class named "tabs-link-selected" to this link
+        this.element.classList.toggle("tabs-link-selected");
+
+        // Call the select method on the item associated with this link
+        this.tabItem.select();
+    }
 }
-
-
-
 
 
 /*
